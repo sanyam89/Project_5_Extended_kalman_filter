@@ -4,6 +4,7 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using std::cout;
+using std::cin;
 using std::endl;
 
 /* 
@@ -34,9 +35,9 @@ void KalmanFilter::Predict() {
   //cout << "P_ = " << P_ << endl;
   x_ = F_*x_;
   P_ = F_*P_*F_.transpose() + Q_;
-  cout<<"AFTER Prediction"<<endl;
-  cout << "x_ = " << x_ << endl;
-  cout << "P_ = " << P_ << endl;
+  cout<<"Predicted: "<<endl;
+  // cout << "x_ = " << x_ << endl;
+  // cout << "P_ = " << P_ << endl;
 }
 
 void KalmanFilter::Update(const VectorXd &z) {
@@ -60,7 +61,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
    */
   
   float rho = sqrt(pow(x_[0],2)+pow(x_[1],2));
-  float theta = atan2(x_[3],x_[2]);
+  float theta = atan2(x_[1],x_[0]);
   float rho_dot = (x_[0]*x_[2] + x_[1]*x_[3])/rho; //0;
   
   VectorXd H_ekf = VectorXd(3);
