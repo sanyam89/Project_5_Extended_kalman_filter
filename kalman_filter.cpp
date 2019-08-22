@@ -68,12 +68,14 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   H_ekf << rho, theta, rho_dot;
   VectorXd y_ = z - H_ekf;
   // Normalizing theta to be between -pi and pi
+  
   if (y_[1] > M_PI){
     y_[1]-=(2*M_PI);
   }
   if (y_[1] < -M_PI){
     y_[1]+=(2*M_PI);
   }
+  
   MatrixXd S_ = H_*P_*H_.transpose() + R_;
   MatrixXd K_ = P_*H_.transpose()*S_.inverse();
   

@@ -54,8 +54,8 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 
   // TODO: YOUR CODE HERE 
   float den = px*px + py*py;
-  if (fabs(den) <0.0001){
-    den = 0.0001;
+  if (fabs(den) <0.001){
+    den = 0.001;
     cout << "ERROR - CalculateJacobian () - Division by Zero" << endl;
 	//return Hj;
   }
